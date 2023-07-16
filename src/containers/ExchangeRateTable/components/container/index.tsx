@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { useTranslation } from 'react-i18next';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 type PageProps = {
     children: ReactNode
 }
@@ -14,10 +15,7 @@ const Page = ({ children }: PageProps) => {
     const { t } = useTranslation()
     const theme = createTheme({
         palette: {
-            primary: {
-                // This is green.A700 as hex.
-                main: '#002C63',
-            },
+            primary: { main: '#002C63', },
         },
     });
     return (

@@ -1,5 +1,5 @@
-import api from '../base'
 import axios from 'axios'
+import api from '../exchange-rate-api'
 
 jest.mock('axios')
 const mockedAxios = axios as jest.Mocked<typeof axios>
