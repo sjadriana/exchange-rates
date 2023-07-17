@@ -21,12 +21,13 @@ describe('TableExhangeRate', () => {
 
     it('deve buscar os dados da API e exibir as linhas corretamente', async () => {
         const mockData = {
+            date: "2023-07-12",
+            timestamp: 1626422400,
             rates: {
                 USD: 1.23,
                 EUR: 0.92,
                 GBP: 0.81,
             },
-            timestamp: 1626422400,
         };
 
         axios.get.mockResolvedValue({ data: mockData });
@@ -40,7 +41,6 @@ describe('TableExhangeRate', () => {
 
         });
         await waitFor(() => {
-
             expect(screen.getByText('USD')).toBeInTheDocument();
 
         });
