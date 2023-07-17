@@ -1,7 +1,7 @@
 {
   "welcome": "Welcome",
   "currency": "Currency",
-  "amount": "Amount (in BRL)",
+  "amount": "Amount (in {{currency}})",
   "time": "Time",
   "error": "Oops! an error has occurred",
   "serverError": "Server error! Please try again later.",
@@ -30,6 +30,7 @@
   "compact":"Compact",
   "standard":"Standard",
   "confortble":"Confortble",
-  "at": "at"
+  "at": "at",
+  "chooseAcurrency":"Choose a currency "
 
 }

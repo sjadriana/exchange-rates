@@ -1,46 +1,45 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import columns from '../utils/columns';
 import { localeText } from '../utils/localeTextTranslations';
 import axios from 'axios'
-// import Autocomplete from '@mui/material/Autocomplete';
-// import _keys from 'lodash/keys'
-// import { TextField } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import _keys from 'lodash/keys'
+import { TextField } from '@mui/material';
+import { useColumns } from '../utils/columns';
+import { useTranslation } from 'react-i18next';
 
 const TableExhangeRate = () => {
+    const { t } = useTranslation()
     const [data, setData] = useState({});
     const [newRows, setNewRows] = useState([])
-    // implementação da seleção de moeda :
-    // const [currencies, setCurrencies] = useState([])
-    // const [value, setValue] = useState('USD');
-    // const currencyKeys = _keys(currencies)
+    const [currencies, setCurrencies] = useState([])
+    const [value, setValue] = useState('BRL');
+    const currencyKeys = _keys(currencies)
+    const columns = useColumns(value)
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             const response = await axios.get(
-                'https://mocki.io/v1/e57779a0-8c69-4b94-8b86-9f065869f289'
-                // implementação da seleção de moeda:
-                // `http://data.fixer.io/api/latest?access_key=85cc2cda75e4378a6fde2b2e24550fa5&base=${value}` não permite selecionar a moeda no plano free
+                `https://v6.exchangerate-api.com/v6/8b51c6e461529c9fcff3b0ef/latest/${value}`
 
             );
             setData(response.data);
-            // implementação da seleção de moeda:
-            // setCurrencies(response.data.rates)
+            setCurrencies(response.data.conversion_rates)
         } catch (error) {
             console.error(error);
         }
-    };
+    }, [value]);
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     const transformObjectToArray = useCallback((obj: any) => {
         const result: any = [];
-        const newObj = obj.rates
+        const newObj = obj.conversion_rates
         for (const currency in newObj) {
-            result.push({ currency: currency, value: newObj[currency], id: currency, timestamp: obj.timestamp, });
+            result.push({ currency: currency, value: newObj[currency], id: currency, timestamp: obj.time_last_update_unix });
         }
         return result
     }, [])
@@ -49,23 +48,17 @@ const TableExhangeRate = () => {
         setNewRows(transformObjectToArray(data))
 
     }, [transformObjectToArray, data])
-
+    console.log(value)
 
     return (
-
         <Box sx={{ width: '70%' }} >
             <Box sx={{ width: '50%', my: 2 }}  >
-                {/* implementação da seleção de moeda: */}
-                {/* opção de escolha de moeda, versão free não permite */}
-                {/* <Autocomplete
+                <Autocomplete
                     options={currencyKeys}
-                    onChange={(event: any, newValue: any) => {
-                        setValue(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params}
-                    />
+                    onChange={(event: any, newValue: any) => setValue(newValue || 'BRL')}
+                    renderInput={(params) => <TextField {...params} label={t('general.chooseAcurrency')} />
                     }
-                /> */}
+                />
             </Box>
             <DataGrid
                 rows={newRows}

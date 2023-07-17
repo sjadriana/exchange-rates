@@ -1,7 +1,7 @@
 {
   "welcome": "Bem vindo",
   "currency": "Moeda",
-  "amount": "Valor (em BRL)",
+  "amount": "Valor (em {{currency}})",
   "time": "Horário",
   "error": "ops! ocorreu um erro",
   "columns": "COLUNAS",
@@ -24,10 +24,10 @@
   "isAnyof": "é qualquer um dos",
   "downloadAs": "Baixar como CSV",
   "print": "Imprimir",
-  "filterValue":"Filtrar valor",
-  "compact":"Compacto",
-  "standard":"Padrão",
-  "confortble":"Confortável",
-  "at": "às"
-
+  "filterValue": "Filtrar valor",
+  "compact": "Compacto",
+  "standard": "Padrão",
+  "confortble": "Confortável",
+  "at": "às",
+  "chooseAcurrency":"Escolha uma moeda"
 }

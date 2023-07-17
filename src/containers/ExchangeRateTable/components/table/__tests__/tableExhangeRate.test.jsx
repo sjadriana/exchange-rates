@@ -21,9 +21,9 @@ describe('TableExhangeRate', () => {
 
     it('deve buscar os dados da API e exibir as linhas corretamente', async () => {
         const mockData = {
-            date: "2023-07-12",
-            timestamp: 1626422400,
-            rates: {
+            time_last_update_utc: "2023-07-12",
+            time_last_update_unix: 1626422400,
+            conversion_rates: {
                 USD: 1.23,
                 EUR: 0.92,
                 GBP: 0.81,
@@ -36,7 +36,7 @@ describe('TableExhangeRate', () => {
 
         await waitFor(() => {
             expect(axios.get).toHaveBeenCalledWith(
-                'https://mocki.io/v1/e57779a0-8c69-4b94-8b86-9f065869f289'
+                'https://v6.exchangerate-api.com/v6/8b51c6e461529c9fcff3b0ef/latest/BRL'
             );
 
         });
