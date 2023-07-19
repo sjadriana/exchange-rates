@@ -48,7 +48,6 @@ const TableExhangeRate = () => {
         setNewRows(transformObjectToArray(data))
 
     }, [transformObjectToArray, data])
-    console.log(value)
 
     return (
         <Box sx={{ width: '70%' }} >
@@ -61,6 +60,7 @@ const TableExhangeRate = () => {
                 />
             </Box>
             <DataGrid
+                slotProps={{ toolbar: { printOptions: { disableToolbarButton: true } } }}
                 rows={newRows}
                 columns={columns}
                 initialState={{
