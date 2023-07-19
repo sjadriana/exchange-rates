@@ -80,6 +80,7 @@ const TableExhangeRate = () => {
                 disableRowSelectionOnClick
                 slots={{ toolbar: GridToolbar }}
                 localeText={localeText}
+                slotProps={{ toolbar: { printOptions: { disableToolbarButton: true } } }}
             />
         </Box>
 
